@@ -11,10 +11,15 @@
     display: block;
     padding: 8px 0;
 
+    .robot {
+      animation: suspension 1s linear infinite;
+    }
+
     .sublogo {
       position: absolute;
       top: 0%;
     }
+
     img {
       display: block;
       margin: 8px auto;
@@ -37,7 +42,7 @@
     width: 100%;
 
     a {
-      font-size: 22px;
+      font-size: 23px;
       color: #4d4d4e;
       display: block;
       line-height: 51px;
@@ -50,7 +55,7 @@
       }
 
       &:hover {
-        color: #ffd700;
+        color: #003cff;
 
         svg {
           opacity: 0;
@@ -63,7 +68,7 @@
 
       &:after {
         content: '';
-        font-size: 9px;
+        font-size: 15px;
         letter-spacing: 2px;
         position: absolute;
         bottom: 0;
@@ -102,7 +107,7 @@
 
     a.active {
       svg {
-        color: #ffd700;
+        color: #003cff;
       }
     }
   }
@@ -121,14 +126,49 @@
       a {
         padding: 7px 0;
         display: block;
-        font-size: 15px;
+        font-size: 25px;
         line-height: 16px;
         color: #4d4d4e;
 
-        &:hover {
-          color: #ffd700;
+        .faGithub:hover {
+          color: #000;
+        }
+        .faLinkedin:hover {
+          color: #1884bc;
+        }
+
+        .faInstagram:hover {
+          background: radial-gradient(
+            circle at 30% 107%,
+            #fdf497 0%,
+            #fdf497 5%,
+            #fd5949 45%,
+            #d6249f 60%,
+            #285aeb 90%
+          );
+          background: -webkit-radial-gradient(
+            circle at 30% 107%,
+            #fdf497 0%,
+            #fdf497 5%,
+            #fd5949 45%,
+            #d6249f 60%,
+            #285aeb 90%
+          );
+          border-radius: 20%;
         }
       }
     }
+  }
+}
+
+@keyframes suspension {
+  100% {
+    transform: translateY(-1px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+  0% {
+    transform: translateY(-1px);
   }
 }
