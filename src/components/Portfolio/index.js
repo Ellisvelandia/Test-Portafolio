@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Loader from 'react-loaders';
 import AnimatedLetters from '../AnimatedLetters';
 import './index.scss';
-import portfolioData from '../../data/portfolio.json';
+import { getDocs, collection } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 const Portfolio = () => {
   const [letterClass, setLetterClass] = useState('text-animate');
-  console.log(portfolioData);
+  const [portfolio, setPortfolio] = useState([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,6 +19,17 @@ const Portfolio = () => {
     };
   });
 
+  useEffect(() => {
+    getPortfolio();
+  }, []);
+
+  const getPortfolio = async () => {
+    const querySnapshot = await getDocs(collection(db, 'portfolio'));
+    setPortfolio(querySnapshot.docs.map((doc) => doc.data()));
+  };
+
+  console.log(portfolio);
+
   const renderPortfolio = (portfolio) => {
     return (
       <div className="images-container">
@@ -25,7 +37,7 @@ const Portfolio = () => {
           return (
             <div className="image-box" key={idx}>
               <img
-                src={port.cover}
+                src={port.image}
                 className="portfolio-image"
                 alt="portfolio"
               />
@@ -53,7 +65,7 @@ const Portfolio = () => {
             idx={15}
           />
         </h1>
-        <div>{renderPortfolio(portfolioData.portfolio)}</div>
+        <div>{renderPortfolio(portfolio)}</div>
       </div>
       <Loader type="pacman" />
     </>
