@@ -1,0 +1,215 @@
+$color-scheme: (
+  robot: white,
+  face: black,
+  eyes: powderblue,
+  heart1: powderblue,
+  heart2: rebeccapurple,
+  heart3: crimson,
+  heart4: mediumvioletred,
+);
+
+$unit: 1.2vmin;
+$hand: polygon(0% 0%, 50% 50%, 100% 0%, 100% 100%, 0% 100%);
+
+@function m($_multiplier: 1) {
+  @return $_multiplier * $unit;
+}
+
+@function col($key) {
+  @return map-get($color-scheme, $key);
+}
+
+@function antenna() {
+  $shadow: 0 m(0.4) 0 m(-0.6) col(robot);
+
+  @for $i from 1 through 16 {
+    $shadow: #{$shadow}, 0 #{m($i * 0.2)} 0 m(-0.6) col(robot);
+  }
+  @return $shadow;
+}
+
+@mixin pseudo {
+  content: '';
+  display: block;
+}
+
+@mixin size($width: 1, $height: $width) {
+  width: m($width);
+  height: m($height);
+}
+
+@mixin pos($top: 1, $left: $top) {
+  position: absolute;
+
+  @if ($top == 'cover') {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  } @else {
+    top: m($top);
+    left: m($left);
+  }
+}
+
+@keyframes shadow {
+  from {
+    transform: translate(0, m(-0.5)) scale(1, 1);
+    background-color: rgba(black, 0.1);
+  }
+  to {
+    transform: translate(0, 0) scale(1.3, 1);
+    background-color: rgba(black, 0.05);
+  }
+}
+
+@keyframes hover {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(0, m(-0.5));
+  }
+}
+
+@keyframes beat {
+  0% {
+    background-color: col(heart2);
+    box-shadow: 0 0 0 0 rgba(col(heart3), 0.3);
+  }
+  50%,
+  70% {
+    background-color: col(heart1);
+    box-shadow: 0 0 m(4) m(5) rgba(col(heart1), 0);
+  }
+  100% {
+    background-color: col(heart2);
+  }
+}
+
+@keyframes wave {
+  from {
+    transform: rotate(15deg);
+  }
+  to {
+    transform: rotate(80deg);
+  }
+}
+
+@keyframes wobble {
+  0% {
+    transform: translate(m(-0.1), 0);
+    background-color: col(heart3);
+    box-shadow: 0 0 0 0 rgba(col(heart3), 0.3);
+  }
+  50%,
+  70% {
+    transform: translate(m(0.1), 0);
+    background-color: col(heart4);
+    box-shadow: 0 0 m(4) m(5) rgba(col(heart3), 0);
+  }
+  100% {
+    transform: translate(m(-0.1), 0);
+    background-color: col(heart2);
+  }
+}
+
+x {
+  display: block;
+  position: absolute;
+  left: 58%;
+  top: 15%;
+  animation: hover 1500ms ease-in-out alternate infinite;
+  max-width: 100%;
+
+  &-head {
+    @include size(10, 5);
+
+    display: block;
+    position: relative;
+    border-radius: m(2.5);
+    background-color: col(face);
+    box-shadow: 0 0 0 m(1.3) col(robot) inset;
+    transition: transform ease-in-out 350ms;
+
+    &::before {
+      @include pseudo;
+      @include size(1.6);
+      @include pos(-4, 4.2);
+
+      border-radius: 50%;
+      background-color: col(robot);
+      box-shadow: antenna();
+    }
+
+    &::after {
+      @include pseudo;
+      @include size(1.5);
+      @include pos(1.8);
+
+      border-radius: m(0.75);
+      background-color: col(eyes);
+      box-shadow: m(4.9) 0 col(eyes);
+      transition: inherit;
+    }
+    &:hover {
+      transform: rotate(15deg) translate(m(1), 0);
+
+      &::after {
+        transform: scale(1, 0.1);
+      }
+    }
+  }
+
+  &-body {
+    @include size(8, 9);
+    @include pos(6, 1);
+
+    display: block;
+    overflow: hidden;
+    border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+    background: col(robot);
+
+    &::after {
+      @include pseudo;
+      @include size(1.5);
+      @include pos(2.5, 4.8);
+
+      border-radius: 50%;
+      animation: beat 4500ms linear infinite;
+    }
+
+    &:hover::after {
+      animation: wobble 1000ms linear infinite;
+    }
+  }
+
+  &-hand {
+    @include size(3.4);
+    @include pos(3, 8.5);
+
+    display: block;
+    border-radius: 50%;
+    transform-origin: 50% m(4.8);
+    box-shadow: 0 m(3) 0 m(-1) col(robot);
+    animation: wave 1000ms alternate ease-in-out infinite;
+
+    &::after {
+      @include pseudo;
+      @include pos(cover);
+
+      clip-path: $hand;
+      border-radius: 50%;
+      box-shadow: 0 0 0 m(1) col(robot) inset;
+    }
+  }
+
+  &::after {
+    @include pseudo;
+    @include size(6, 1.5);
+    @include pos(16, 2);
+
+    border-radius: 50%;
+    animation: shadow 1500ms ease-in-out alternate infinite;
+  }
+}

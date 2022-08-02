@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Loader from 'react-loaders'
+import Loader from 'react-loaders';
 import LogoTitle from '../../assets/images/ellisvelandia.png';
 import AnimatedLetters from '../AnimatedLetters';
 import './index.scss';
+import './robot.scss';
 
 const Home = () => {
   const [letterClass, setLetterClass] = useState('text-animate');
@@ -77,6 +78,11 @@ const Home = () => {
             CONTACT ME
           </Link>
         </div>
+        <x>
+          <x-head></x-head>
+          <x-body></x-body>
+          <x-hand></x-hand>
+        </x>
       </div>
       <Loader type="pacman" />
     </>
