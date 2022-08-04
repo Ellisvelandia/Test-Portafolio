@@ -121,6 +121,7 @@ x {
   top: 15%;
   animation: hover 1500ms ease-in-out alternate infinite;
   max-width: 100%;
+  z-index: 5;
 
   &-head {
     @include size(10, 5);

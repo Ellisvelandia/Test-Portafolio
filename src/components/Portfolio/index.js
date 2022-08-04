@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Loader from 'react-loaders';
 import AnimatedLetters from '../AnimatedLetters';
 import './index.scss';
@@ -61,7 +61,7 @@ const Portfolio = () => {
         <h1 className="page-title">
           <AnimatedLetters
             letterClass={letterClass}
-            strArray={'portfolio'.split('')}
+            strArray={'Portfolio'.split('')}
             idx={15}
           />
         </h1>
