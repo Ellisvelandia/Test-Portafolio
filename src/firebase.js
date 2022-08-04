@@ -4,12 +4,12 @@ import { getStorage } from 'firebase/storage';
 import { getFirestore } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCjDZZN9VGk2X3YOVzvv8VS-t9vyL3RrZA',
-  authDomain: 'react-portfolio-dashboar-2ba91.firebaseapp.com',
-  projectId: 'react-portfolio-dashboar-2ba91',
-  storageBucket: 'react-portfolio-dashboar-2ba91.appspot.com',
-  messagingSenderId: '997725133857',
-  appId: '1:997725133857:web:a6ef41cad34df0ee019760',
+  apiKey: 'AIzaSyB-js-kpQKw3UCDgTvOs4ug0zuy5CPbqTk',
+  authDomain: 'react--portfolio-dashboard.firebaseapp.com',
+  projectId: 'react--portfolio-dashboard',
+  storageBucket: 'react--portfolio-dashboard.appspot.com',
+  messagingSenderId: '672666038864',
+  appId: '1:672666038864:web:7dab01f6a350d954c1d755',
 };
 
 const app = initializeApp(firebaseConfig);

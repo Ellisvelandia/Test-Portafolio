@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { auth, storage, db } from '../../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { addDoc } from 'firebase/firestore';
-import { collection } from 'firebase/firestore/lite';
+import { collection } from 'firebase/firestore/lite'; 
 
 const Home = () => {
   const form = useRef();
@@ -49,16 +49,16 @@ const Home = () => {
       }
     );
   };
-
-  const savePortfolio = async (portfolio) => {
-    console.log(portfolio);
-    try {
-      await addDoc(collection(db, 'portfolio'), portfolio);
-      window.location.reload(false);
-    } catch (error) {
-      alert('Failed to add portfolio');
-    }
-  };
+ 
+    const savePortfolio = async (portfolio) => {
+      console.log(portfolio);
+      try {
+        await addDoc(collection(db, 'portfolio'), portfolio);
+        window.location.reload(false);
+      } catch (error) {
+        alert('Failed to add portfolio');
+      }
+    };
 
   return (
     <div className="dashboard">
